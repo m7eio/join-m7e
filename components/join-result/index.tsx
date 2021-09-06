@@ -60,7 +60,7 @@ export default function JoinResult({ onClose }) {
         {/* <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20">
           set as <span className="underline">Dataverse</span> avatar 👀
         </button> */}
-        <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4" onClick={showModal}>
+        <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20" onClick={showModal}>
           get airdrop 🦄
         </button>
         <a

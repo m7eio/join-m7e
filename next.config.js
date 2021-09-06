@@ -19,7 +19,6 @@ module.exports = withAntdLess({
 
     return config;
   },
-
   i18n: {
     locales: ['zh-CN', 'en-US'],
     defaultLocale: 'en-US',

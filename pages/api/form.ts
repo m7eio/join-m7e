@@ -2,7 +2,6 @@ export default async function handler(req, res) {
   const { method, body } = req;
 
   if (method === 'POST') {
-    console.log(body);
     await fetch('https://form.nft4metaverse.io/join-m7e/submission', {
       method: 'POST',
       headers: {

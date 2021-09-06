@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ethers = require("ethers")
 
 async function createRequest(fromAccount, toAddress, efd) {

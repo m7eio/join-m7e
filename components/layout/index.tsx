@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
@@ -8,13 +7,6 @@ import { SkipNavContent } from '@reach/skip-nav';
 import ConnectWallet from '../web3-wallet/connect-wallet';
 import ChooseWallet from '../web3-wallet';
 import network from '../web3-wallet/network';
-
-import MobileMenu from '../mobile-menu';
-import { NAVIGATION } from '../../common/const';
-import SwitchLocale from '../switch-locale';
-
-// import Logo from './icons/icon-logo';
-import Footer from '../footer';
 
 type Props = {
   children: React.ReactNode;
@@ -29,11 +21,9 @@ type Props = {
 export default function Layout({
   children,
   className,
-  hideNav,
   layoutStyles,
   fixed = false,
   headerBgCls,
-  extra,
 }: Props) {
   const router = useRouter();
   const activeRoute = router.asPath;

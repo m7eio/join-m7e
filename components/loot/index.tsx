@@ -13,6 +13,18 @@ export default function Loot({
 }) {
   const [avatar, setAvatar] = React.useState<string>('');
 
+  const getAvatar = React.useCallback(async (loot: ethers.Contract, erc20Address: string) => {
+    const tokenURIB64 = await loot.tokenURI(erc20Address);
+    const tokenURI = JSON.parse(Buffer.from(tokenURIB64.split(',')[1], 'base64').toString('utf8'));
+    const b64svg = tokenURI.image;
+    const svg = Buffer.from(b64svg.split(',')[1], 'base64').toString('utf8');
+
+    const items = itemsFromSvg(svg);
+    const img = await getImageForLoot(items);
+
+    setAvatar(img);
+  }, [null]);
+
   React.useEffect(() => {
     if (!address || !providers) return;
   
@@ -24,20 +36,6 @@ export default function Loot({
 
     getAvatar(syntheticLoot, address);
   }, [address]);
-
-  const getAvatar = async (loot: ethers.Contract, address: string) => {
-    const tokenURIB64 = await loot.tokenURI(address);
-    const tokenURI = JSON.parse(Buffer.from(tokenURIB64.split(',')[1], 'base64').toString('utf8'));
-    const b64svg = tokenURI.image;
-    const svg = Buffer.from(b64svg.split(',')[1], 'base64').toString('utf8');
-
-    const items = itemsFromSvg(svg);
-    console.log(items);
-    const img = await getImageForLoot(items);
-    console.log(img);
-
-    setAvatar(img);
-  };
 
   return (
     <div className="border border-white w-80 h-80 sm:w-96	sm:h-96 flex justify-center items-center">

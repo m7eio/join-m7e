@@ -1,3 +1,4 @@
+/* eslint-disable */
 const {default:mergeImages} = require("merge-images")
 const daploymentMap = require("./deployments/map.json")
 

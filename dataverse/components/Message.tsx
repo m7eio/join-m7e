@@ -1,4 +1,6 @@
-import { css, keyframes } from '@emotion/react';
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx, keyframes } from '@emotion/react';
 import ReactDOM from 'react-dom';
 
 export enum MessageTypes {
@@ -98,7 +100,9 @@ export const MessageComp = (props: MessageProps) => {
 const message = (props: MessageProps & { duration?: number }) => {
   const holder = document.createElement('div');
   document.body.append(holder);
-
+  console.log('holder');
+  console.log(document);
+  console.log(holder);
   const destroy = () => {
     holder.remove();
   };

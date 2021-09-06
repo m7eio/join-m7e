@@ -46,7 +46,6 @@ export default function JoinResult({ onClose }) {
     if (loading) {
       return;
     }
-    console.log(333)
 
     if (isMetaMask === false) {
       window.open(
@@ -58,19 +57,16 @@ export default function JoinResult({ onClose }) {
 
     setLoading(true);
     try {
-      console.log(222)
       initIDX();
       const addresses = (await window['ethereum' as keyof typeof window].request({
         method: 'eth_requestAccounts',
       })) as Array<string>;
 
       const { character, items } = await fetchLoot(addresses[0]);
-      console.log(111)
-      console.log(character)
 
       console.log(items);
 
-      alert('IDX Authentication');
+      Message({ content: '3ID authenticating...' });
       const [, cid] = await Promise.all([
         authenticateIDX(window['ethereum' as keyof typeof window], address),
         storeLootImg(character),
@@ -102,19 +98,16 @@ export default function JoinResult({ onClose }) {
         },
       };
 
-      Message({ content: 'Initializing #Dataverse!' });
-
-      alert('Curating Avator');
+      Message({ content: 'Initializing Dataverse...' });
 
       await Promise.all([initCollections(), setCryptoAccounts(addresses[0]), setProfile(profile)]);
 
       const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[view in Dataverse]</a>`;
       Message({ content: redirectUrl, duration: 10_000 }); // cannot work here, why?
 
-      alert(redirectUrl);
     } catch (error) {
       console.log(error);
-      Message({ content: 'Failed!', type: MessageTypes.Error });
+      Message({ content: 'Failed Network!', type: MessageTypes.Error });
       setLoading(false);
       return;
     }

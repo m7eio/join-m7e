@@ -1,6 +1,4 @@
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/router';
-import { SITE_NAME, META_DESCRIPTION } from '../common/const';
 
 import React from 'react';
 import classnames from 'classnames';
@@ -10,6 +8,9 @@ import Layout from '../components/layout';
 import useWalletProvider from '../components/web3-wallet/wallet-provider';
 import network from '../components/web3-wallet/network';
 import JoinResult from '../components/join-result';
+import { switchWallet } from '../components/web3-wallet/connect-wallet';
+import { SITE_NAME, META_DESCRIPTION } from '../common/const';
+
 import Logo1 from '../public/images/imtoken.svg';
 import Logo2 from '../public/images/dataverse.svg';
 import Logo3 from '../public/images/goatnft.svg';
@@ -28,6 +29,7 @@ export default function Home() {
   const meta = {
     title: `${tNavigation('home')} - ${SITE_NAME}`,
     description: META_DESCRIPTION,
+    image: '/images/logo5.png'
   };
 
   const cls = classnames(
@@ -41,6 +43,13 @@ export default function Home() {
   };
 
   const submit = async () => {
+    if (!address) {
+      switchWallet();
+      return;
+    }
+
+    if (!twitter) return;
+
     setSubmiting(true);
     try {
       await fetch('/api/form', {
@@ -59,15 +68,21 @@ export default function Home() {
     setSubmiting(false);
   };
 
-  const isAddres = ethers.utils.isAddress(address);
-  const enable = isAddres && !submiting && twitter;
+  const renderButtonText = React.useMemo(() => {
+    if (submiting) {
+      return 'Loading...';
+    }
+
+    if (!address) {
+      return 'Connect Wallet';
+    }
+
+    return 'Get M7E Passport';
+  }, [address, submiting]);
 
   return (
     <Page meta={meta} className={styles.bg}>
-      <Layout
-        className={cls}
-        headerBgCls="pt-14 flex flex-row w-full justify-end main-content"
-      >
+      <Layout className={cls} headerBgCls="pt-14 flex flex-row w-full justify-end main-content">
         <div
           className={classnames(
             styles.loot,
@@ -76,19 +91,19 @@ export default function Home() {
           )}
         >
           <p>Self Awakened</p>
-          <p className="mt-1">Quest for Metaverse Identity</p>
-          <p className="mt-1">Shanghai Metaverse Week</p>
-          <p className="mt-1">October 22-28, 2021</p>
-          <p className="mt-1">Read Online (m7e.sh, Twittersphere)</p>
-          <p className="mt-1">
+          <p>Quest for Metaverse Identity</p>
+          <p>Shanghai Metaverse Week</p>
+          <p>October 22-28, 2021</p>
+          <p>Read Online (m7e.sh, Twittersphere)</p>
+          <p>
             Play in Metaverse (Somium Space, Decentraland, CryptoVoxels, Sandbox)
           </p>
-          <p className="mt-1">Meet in Physical World (M50 Shanghai, Silicon Valley)</p>
+          <p>Meet in Physical World (Shanghai, Silicon Valley)</p>
           <p className="mt-1">
             Have Fun (NFT Claim, Airdrop, Exhibition, Forum, Meetup, Scavenger Hunt…)
           </p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row mt-8 fonts-times-new-roman ">
+        <div className="w-full flex flex-col sm:flex-row mt-10 fonts-times-new-roman ">
           <div className="flex items-center">
             <span className="text-white mr-2">@</span>
             <input
@@ -99,17 +114,12 @@ export default function Home() {
             />
           </div>
           <button
-            disabled={!enable}
             className={classnames(
               'h-10 sm:h-14 mt-4 sm:mt-0 w-40 px-4 py-2 bg-white text-black sm:ml-2',
-              {
-                'bg-gray-100': !enable,
-                'text-gray-500': !enable,
-              },
             )}
             onClick={submit}
           >
-            {submiting ? 'Loading' : 'Get M7E Passport'}
+            {renderButtonText}
           </button>
         </div>
 
@@ -144,9 +154,10 @@ export default function Home() {
             style={{
               position: 'absolute',
               width: 'auto',
-              maxWidth: '1300px',
-              right: '-17%',
-              bottom: '-36%',
+              maxWidth: '100%',
+              right: 0,
+              bottom: 0,
+              transform: "translate(35%, 31%)"
             }}
           />
         </div>

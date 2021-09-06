@@ -35,7 +35,7 @@ export default function Loot({
     );
 
     getAvatar(syntheticLoot, address);
-  }, [address]);
+  }, [address, providers]);
 
   return (
     <div className="border border-white w-80 h-80 sm:w-96	sm:h-96 flex justify-center items-center">

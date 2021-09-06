@@ -22,8 +22,8 @@ export async function storeLootImg(blob_data: string) {
 
 export async function fetchLoot(address: string) {
   let provider;
-  if (window.ethereum) {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
+  if (window['ethereum' as keyof typeof window]) {
+    provider = new ethers.providers.Web3Provider(window['ethereum' as keyof typeof window]);
   } else {
     provider = new ethers.providers.JsonRpcProvider(
       'https://mainnet.infura.io/v3/f29f1c340a60430ebff33f1ed9dad190',

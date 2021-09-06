@@ -46,6 +46,7 @@ export default function JoinResult({ onClose }) {
     if (loading) {
       return;
     }
+    console.log(333)
 
     if (isMetaMask === false) {
       window.open(
@@ -57,18 +58,21 @@ export default function JoinResult({ onClose }) {
 
     setLoading(true);
     try {
+      console.log(222)
       initIDX();
-      const addresses = (await window.ethereum.request({
+      const addresses = (await window['ethereum' as keyof typeof window].request({
         method: 'eth_requestAccounts',
       })) as Array<string>;
 
       const { character, items } = await fetchLoot(addresses[0]);
+      console.log(111)
+      console.log(character)
 
       console.log(items);
 
       alert('IDX Authentication');
       const [, cid] = await Promise.all([
-        authenticateIDX(window.ethereum, address),
+        authenticateIDX(window['ethereum' as keyof typeof window], address),
         storeLootImg(character),
       ]);
 
@@ -147,11 +151,14 @@ export default function JoinResult({ onClose }) {
           </div>
         </div>
 
-        {/* <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20">
-          set as <span className="underline">Dataverse</span> avatar 👀
-        </button> */}
         <button
           className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20"
+          onClick={authenticate}
+        >
+          set as <span className="underline">Dataverse</span> avatar 👀
+        </button>
+        <button
+          className="h-14 w-60 px-4 py-2 bg-white text-black mb-4"
           onClick={showModal}
         >
           get airdrop 🦄

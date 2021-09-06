@@ -1,0 +1,17 @@
+import React from 'react';
+
+interface Props extends React.HTMLAttributes<HTMLImageElement> {
+  width?: number;
+  height?: number;
+}
+
+export default function Clock({ width = 20, height = 20, ...props }: Props) {
+  return (
+    <img
+      width={width}
+      height={height}
+      {...props}
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACl0lEQVRYCcVXMWsUQRSet4lip1UgB4KVRRAU7Gxi/oEg8bAQckVObISQLn3SBSGdJ3gBCzkTwYC1SWWVI1zjHwjcQSpLEd2X773b2Uz2dvfmLpO7hWNn5r33fd++mX331pgpX+TLz8xR49PeE/OPnxHxY8RVmKki8Zh3ceti3jaz9K3+avknEcViG3YNFdBsHt76S2dvDZt1wzw3DFDtRGeGzPZNntup1Zb+lMWUCmjstp7jyd+B/G4ZSKGNzCkysVZfqX4t8onyDCCl983WJse8Pza5AEO4YCgWMPO4BhaFHE/+GcHVvICx18i0kImXyAi7GDPuRMaVewubIH+TXQ8wf9Du/Lrx/WD/h4t1aQtkz3HQNlyH4jF1IppZkh/eg06xn2MBtnI4S6kAOe164Bxj2RB793u1tnwkPxmX+bo24RAuu5YKSF618U67RfO542AqV+KrAqAqwr6v+8QH8QGXcgJMBWiF8y0yIRSASzmtACmvIXBHwkg4NQNJbR8p/qrOlnM2AdI/lXFBUeNO8CZcFBgmTPsXFu/A9NDOnbtyqgAUP0wu4h0nr+HrWnWtyPFDc+9pzP8Ps/Y+Z3IIs8ZJzG3GNAPyf85s7o9CjHw9anxsHQ2LiTnGFuRcxD1ZtWdAGoqRBGDLbkPEYg6075Jw9usA9qPtGxXMj+g4FSBtVDBgTyCO6EBc9XWRstjY/dLzbrk8SQrd0LLVV17MozeIk0KEBhI9XGFAaAO4hFxgVYAMpIGEiFMZX+sFDuVKSFIB0r1CVWFBCSVKONxOORUgBNq9Em2FIhvAAXa2Q05rtnXGgZxoU3opAyICKWLpXjEIl4n+kw90xMpnnzzvPokPk4EtyAqZ6qeZK0aL1TV8nLocUxmfA6HMD4J7+k/fAAAAAElFTkSuQmCC"
+    />
+  );
+}

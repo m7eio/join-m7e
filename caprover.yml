@@ -1,0 +1,33 @@
+captainVersion: 4
+services:
+    $$cap_webapp:
+        environment:
+            GHOST_CMS_URL: $$cap_webapp-cms-url
+            GHOST_CONTENT_API_KEY: $$cap_webapp-cms-api-key
+        webapp:
+            build: ./
+        image: ghost:$$cap_ghost_version
+        restart: always
+        volumes:
+            - $$cap_webapp-data:/nft4metaverse
+        caproverExtra:
+            containerHttpPort: '3000'
+caproverOneClickApp:
+    variables:
+        - defaultValue: https://cms.nft4metaverse.io/ghost/api/v3
+          description: ghost cms api endpoint
+          id: $$cap_webapp-cms-url
+          label: Ghost cms api endpoint
+        - defaultValue: cms-api-key
+          description: Ghost cms api key
+          id: $$cap_webapp-cms-api-key
+          label: Ghost cms api key
+    instructions:
+        end: >
+            Next.js is deployed and available as $$cap_appname. 
+            IMPORTANT: It will take up to 2 minutes for Next.js to be ready. Before that, you might see 502 error page.
+        start: Next.js is a fully open source, adaptable platform for building and running a modern online publication. We power blogs, magazines and journalists from Zappos to Sky News.
+    displayName: ''
+    isOfficial: true
+    description: Next.js is a free and open source blogging platform written in JavaScript and distributed under the MIT License
+    documentation: Taken from https://nextjs.org/

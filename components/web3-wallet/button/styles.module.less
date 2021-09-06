@@ -1,0 +1,107 @@
+.goatnft-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.goatnft-btn-small {
+  height: 24px;
+  padding: 0 8px;
+}
+
+.goatnft-btn-medium {
+  height: 40px;
+  padding: 0 40px;
+}
+
+.goatnft-btn-large {
+  height: 48px;
+  padding: 0 16px;
+}
+
+.goatnft-btn-gradient {
+  background-image: linear-gradient(135deg, #2365f0 0%, #793aff 52%, #ff712c 100%);
+}
+
+.goatnft-btn-gradientBorder {
+  position: relative;
+  height: 32px;
+  padding: 0 16px;
+  line-height: 32px;
+  background-image: linear-gradient(135deg, #2365f0 0%, #793aff 52%, #ff712c 100%);
+}
+
+.goatnft-btn-gradientBorder .goatnft-text {
+  display: block;
+  font-size: 14px;
+  line-height: 30px;
+}
+
+.goatnft-btn-gradientBorder .bg-white {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(98%);
+  height: calc(98%);
+  margin: auto;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.goatnft-btn-gradientBorder .btn-text-con {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.goatnft-btn-ghost {
+  border: 1px solid #b3b3b3;
+}
+
+.goatnft-btn-gray {
+  color: #626262;
+  background: #f7f9fd;
+}
+
+.goatnft-btn-text {
+  color: #626262;
+  background: transparent;
+}
+
+.goatnft-btn-loading,
+.goatnft-btn-disabled {
+  pointer-events: none;
+}
+
+.goatnft-btn-loading::before,
+.goatnft-btn-disabled::before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  z-index: 1;
+  display: block;
+  background: #fff;
+  border-radius: inherit;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+  content: '';
+  user-select: none;
+  pointer-events: none;
+}

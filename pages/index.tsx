@@ -9,6 +9,7 @@ import Layout from '../components/layout';
 import useWalletProvider from '../components/web3-wallet/wallet-provider';
 import network from '../components/web3-wallet/network';
 import JoinResult from '../components/join-result';
+import { switchWallet } from '../components/web3-wallet/connect-wallet';
 import { SITE_NAME, META_DESCRIPTION } from '../common/const';
 
 import Logo1 from '../public/images/imtoken.svg';
@@ -43,6 +44,13 @@ export default function Home() {
   };
 
   const submit = async () => {
+    if (!address) {
+      switchWallet();
+      return;
+    }
+
+    if (!twitter) return;
+
     setSubmiting(true);
     try {
       await fetch('/api/form', {
@@ -61,15 +69,21 @@ export default function Home() {
     setSubmiting(false);
   };
 
-  const isAddres = ethers.utils.isAddress(address);
-  const enable = isAddres && !submiting && twitter;
+  const renderButtonText = React.useMemo(() => {
+    if (submiting) {
+      return 'Loading...';
+    }
+
+    if (!address) {
+      return 'Connect Wallet';
+    }
+
+    return 'Get M7E Passport';
+  }, [address, submiting]);
 
   return (
     <Page meta={meta} className={styles.bg}>
-      <Layout
-        className={cls}
-        headerBgCls="pt-14 flex flex-row w-full justify-end main-content"
-      >
+      <Layout className={cls} headerBgCls="pt-14 flex flex-row w-full justify-end main-content">
         <div
           className={classnames(
             styles.loot,
@@ -101,17 +115,12 @@ export default function Home() {
             />
           </div>
           <button
-            disabled={!enable}
             className={classnames(
               'h-10 sm:h-14 mt-4 sm:mt-0 w-40 px-4 py-2 bg-white text-black sm:ml-2',
-              {
-                'bg-gray-100': !enable,
-                'text-gray-500': !enable,
-              },
             )}
             onClick={submit}
           >
-            {submiting ? 'Loading' : 'Get M7E Passport'}
+            {renderButtonText}
           </button>
         </div>
 
@@ -146,9 +155,10 @@ export default function Home() {
             style={{
               position: 'absolute',
               width: 'auto',
-              maxWidth: '1300px',
-              right: '-17%',
-              bottom: '-36%',
+              maxWidth: '100%',
+              right: 0,
+              bottom: 0,
+              transform: "translate(35%, 31%)"
             }}
           />
         </div>

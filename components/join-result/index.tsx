@@ -50,8 +50,9 @@ export default function JoinResult({ onClose }) {
     setLoading(true);
     try {
       initIDX();
+      if(!avatar) throw new Error('Check your avatar')
 
-      Message({ content: 'start authenticating...' });
+      Message({ content: 'Start authenticating...' });
       const [, cid] = await Promise.all([
         authenticateIDX(window['ethereum' as keyof typeof window], address),
         storeLootImg(avatar),
@@ -87,7 +88,7 @@ export default function JoinResult({ onClose }) {
 
       await Promise.all([initCollections(), setCryptoAccounts(address), setProfile(profile)]);
 
-      const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[view in Dataverse]</a>`;
+      const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[View in Dataverse]</a>`;
       Message({ content: redirectUrl, duration: 10_000 });
 
     } catch (error) {

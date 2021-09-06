@@ -1,15 +1,26 @@
-import React from 'react';
-import { ethers } from 'ethers';
-import LootAvatar from '../loot';
-import useWalletProvider, { PROVIDER } from '../web3-wallet/wallet-provider';
+import React, { useCallback, useState } from 'react';
+import { BasicProfile } from 'dataverse-sdk';
+import useWalletProvider from '../web3-wallet/wallet-provider';
 import network from '../web3-wallet/network';
 import { simpleAdress } from '../web3-wallet/connect-wallet';
 import Modal from '../web3-wallet/modal';
 
+import { fetchLoot, storeLootImg } from '../../dataverse/apis/loot';
+import {
+  authenticateIDX,
+  initCollections,
+  initIDX,
+  getDID,
+  setCryptoAccounts,
+  setProfile,
+} from '../../dataverse/apis/ceramic';
+import Message, { MessageTypes } from '../../dataverse/components/Message';
+
 export default function JoinResult({ onClose }) {
-  const { address, provider } = useWalletProvider({ network });
-  const [providers, setProviders] = React.useState<ethers.providers.Web3Provider>();
+  const [loading, setLoading] = useState(false);
+  const { address } = useWalletProvider({ network });
   const [showAirdropModal, setShowAirdropModal] = React.useState(false);
+  const [avatar, setAvatar] = React.useState<string>('');
 
   const closeModal = React.useCallback(() => {
     setShowAirdropModal(false);
@@ -19,14 +30,76 @@ export default function JoinResult({ onClose }) {
     setShowAirdropModal(true);
   }, [null]);
 
-  React.useEffect(() => {
-    if (!address) return;
+  const getAvatar = React.useCallback(async (ethAddress: string) => {
+    const { character, items } = await fetchLoot(ethAddress);
+    console.log(items);
+    setAvatar(character);
+  }, [avatar]);
 
-    if (provider === PROVIDER.METAMASK) {
-      // @ts-ignore
-      setProviders(new ethers.providers.Web3Provider(window.ethereum));
+  React.useEffect(() => {
+    if (address) {
+      getAvatar(address);
     }
-  }, [address, provider]);
+  }, [avatar, address]);
+
+  const authenticate = useCallback(async () => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      initIDX();
+      if(!avatar) throw new Error('Check your avatar')
+
+      Message({ content: 'Start authenticating...' });
+      const [, cid] = await Promise.all([
+        authenticateIDX(window['ethereum' as keyof typeof window], address),
+        storeLootImg(avatar),
+      ]);
+
+      console.log(cid);
+
+      const did = getDID();
+      console.log(did);
+
+      const profile: BasicProfile = {
+        name: 'test_name',
+        description: 'test_description',
+        image: {
+          original: {
+            src: `ipfs://${cid}`,
+            mimeType: 'image/png',
+            width: 1,
+            height: 1,
+          },
+        },
+        background: {
+          original: {
+            src: 'ipfs://bafy...',
+            mimeType: 'image/png',
+            width: 1,
+            height: 1,
+          },
+        },
+      };
+
+      Message({ content: 'Init your Dataverse...' });
+
+      await Promise.all([initCollections(), setCryptoAccounts(address), setProfile(profile)]);
+
+      const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[View in Dataverse]</a>`;
+      Message({ content: redirectUrl, duration: 10_000 });
+
+    } catch (error) {
+      console.log(error);
+      Message({ content: 'Failed Network!', type: MessageTypes.Error });
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  }, [loading, avatar]);
 
   const shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     `I have claimed my #loot avatar passport that is qualified to win #NFT airdrops and have fun at #ShanghaiMetaverseWeek @imTokenOfficial @goatnftio @OwnershipLabs @NFT4Metaverse`,
@@ -48,7 +121,9 @@ export default function JoinResult({ onClose }) {
         <div className="text-white text-2xl	fonts-times-new-roman">here’s your M7E passport</div>
 
         <div className="mt-14">
-          <LootAvatar address={address} providers={providers} />
+          <div className="border border-white w-80 h-80 sm:w-96	sm:h-96 flex justify-center items-center">
+           { avatar ? <img className="w-full h-full" src={avatar} /> : <div className="text-white">Loading...</div> }
+           </div>
           <div className="text-gray-400 text-right mt-1">
             powered by{' '}
             <a href="https://twitter.com/stephancill" className="underline">
@@ -57,10 +132,16 @@ export default function JoinResult({ onClose }) {
           </div>
         </div>
 
-        {/* <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20">
+        <button
+          className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20"
+          onClick={authenticate}
+        >
           set as <span className="underline">Dataverse</span> avatar 👀
-        </button> */}
-        <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20" onClick={showModal}>
+        </button>
+        <button
+          className="h-14 w-60 px-4 py-2 bg-white text-black mb-4"
+          onClick={showModal}
+        >
           get airdrop 🦄
         </button>
         <a

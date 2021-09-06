@@ -1,7 +1,8 @@
-import React from 'react';
-import classnames from 'classnames';
 import { useTranslations } from 'next-intl';
 
+import React from 'react';
+import classnames from 'classnames';
+import * as ethers from 'ethers';
 import Page from '../components/page';
 import Layout from '../components/layout';
 import useWalletProvider from '../components/web3-wallet/wallet-provider';
@@ -15,14 +16,13 @@ import Logo2 from '../public/images/dataverse.svg';
 import Logo3 from '../public/images/goatnft.svg';
 import Logo4 from '../public/images/nft4metaverse.svg';
 import Footer from '../components/footer';
-
 import styles from '../styles/index.module.css';
 
 export default function Home() {
   const [twitter, setTwitter] = React.useState('');
   const [submiting, setSubmiting] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
-  const { address } = useWalletProvider({ network });
+  const {address} = useWalletProvider({ network });
 
   const tNavigation = useTranslations('navigation');
 

@@ -90,19 +90,19 @@ export default function Home() {
           )}
         >
           <p>Self Awakened</p>
-          <p className="mt-1">Quest for Metaverse Identity</p>
-          <p className="mt-1">Shanghai Metaverse Week</p>
-          <p className="mt-1">October 22-28, 2021</p>
-          <p className="mt-1">Read Online (m7e.sh, Twittersphere)</p>
-          <p className="mt-1">
+          <p>Quest for Metaverse Identity</p>
+          <p>Shanghai Metaverse Week</p>
+          <p>October 22-28, 2021</p>
+          <p>Read Online (m7e.sh, Twittersphere)</p>
+          <p>
             Play in Metaverse (Somium Space, Decentraland, CryptoVoxels, Sandbox)
           </p>
-          <p className="mt-1">Meet in Physical World (Silicon Valley)</p>
+          <p>Meet in Physical World (Silicon Valley)</p>
           <p className="mt-1">
             Have Fun (NFT Claim, Airdrop, Exhibition, Forum, Meetup, Scavenger Hunt…)
           </p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row mt-8 fonts-times-new-roman ">
+        <div className="w-full flex flex-col sm:flex-row mt-10 fonts-times-new-roman ">
           <div className="flex items-center">
             <span className="text-white mr-2">@</span>
             <input

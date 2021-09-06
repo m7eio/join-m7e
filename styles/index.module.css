@@ -21,6 +21,9 @@
   text-align: left;
 }
 
+.loot p {
+  line-height: 1
+}
 .svgbox {
   width: 100%;
   height: 400px;

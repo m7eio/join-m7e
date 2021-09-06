@@ -29,7 +29,7 @@ export default function JoinResult({ onClose }) {
   }, [address, provider]);
 
   const shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    `I have claimed my #loot avatar passport that is qualified to win #NFT airdrops and have fun at #ShanghaiMetaverseWeek @NFT4Metaverse`,
+    `I have claimed my #loot avatar passport that is qualified to win #NFT airdrops and have fun at #ShanghaiMetaverseWeek @imTokenOfficial @goatnftio @OwnershipLabs @NFT4Metaverse`,
   )}`;
 
   return (
@@ -57,9 +57,9 @@ export default function JoinResult({ onClose }) {
           </div>
         </div>
 
-        <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20">
+        {/* <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4 mt-10 sm:mt-20">
           set as <span className="underline">Dataverse</span> avatar 👀
-        </button>
+        </button> */}
         <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4" onClick={showModal}>
           get airdrop 🦄
         </button>

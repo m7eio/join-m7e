@@ -107,7 +107,7 @@ export default function Home() {
           <div className="flex items-center">
             <span className="text-white mr-2">@</span>
             <input
-              placeholder="twitter hander"
+              placeholder="twitter handle"
               value={twitter}
               onChange={onSearchChange}
               className="h-10 sm:h-14 px-2 w-60 sm:w-80 bg-transparent border border-white	text-white"

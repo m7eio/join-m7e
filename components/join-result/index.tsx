@@ -34,13 +34,13 @@ export default function JoinResult({ onClose }) {
     const { character, items } = await fetchLoot(ethAddress);
     console.log(items);
     setAvatar(character);
-  }, [null]);
+  }, [avatar]);
 
   React.useEffect(() => {
     if (address) {
       getAvatar(address);
     }
-  }, [address]);
+  }, [avatar, address]);
 
   const authenticate = useCallback(async () => {
     if (loading) {
@@ -99,7 +99,7 @@ export default function JoinResult({ onClose }) {
     }
 
     setLoading(false);
-  }, [loading]);
+  }, [loading, avatar]);
 
   const shareLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     `I have claimed my #loot avatar passport that is qualified to win #NFT airdrops and have fun at #ShanghaiMetaverseWeek @imTokenOfficial @goatnftio @OwnershipLabs @NFT4Metaverse`,

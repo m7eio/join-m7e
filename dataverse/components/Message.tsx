@@ -100,9 +100,6 @@ export const MessageComp = (props: MessageProps) => {
 const message = (props: MessageProps & { duration?: number }) => {
   const holder = document.createElement('div');
   document.body.append(holder);
-  console.log('holder');
-  console.log(document);
-  console.log(holder);
   const destroy = () => {
     holder.remove();
   };

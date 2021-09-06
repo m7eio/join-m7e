@@ -29,6 +29,7 @@ export default function Home() {
   const meta = {
     title: `${tNavigation('home')} - ${SITE_NAME}`,
     description: META_DESCRIPTION,
+    image: '/images/logo5.png'
   };
 
   const cls = classnames(

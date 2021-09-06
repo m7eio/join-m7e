@@ -97,7 +97,7 @@ export default function Home() {
           <p className="mt-1">
             Play in Metaverse (Somium Space, Decentraland, CryptoVoxels, Sandbox)
           </p>
-          <p className="mt-1">Meet in Physical World (M50 Shanghai, Silicon Valley)</p>
+          <p className="mt-1">Meet in Physical World (Silicon Valley)</p>
           <p className="mt-1">
             Have Fun (NFT Claim, Airdrop, Exhibition, Forum, Meetup, Scavenger Hunt…)
           </p>

@@ -1,8 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/router';
-import * as ethers from 'ethers';
 
 import Page from '../components/page';
 import Layout from '../components/layout';

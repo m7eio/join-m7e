@@ -18,8 +18,6 @@ export default function JoinResult({ onClose }) {
     }
   }, [address, provider]);
 
-  const retweet = React.useCallback((id: string) => {}, []);
-
   return (
     <div className="pt-40 fixed w-screen h-screen top-0	left-0 bg-black z-10 overflow-auto">
       <div className="flex flex-col justify-center items-center pb-10">

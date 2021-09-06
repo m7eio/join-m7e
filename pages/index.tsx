@@ -6,15 +6,11 @@ import * as ethers from 'ethers';
 
 import Page from '../components/page';
 import Layout from '../components/layout';
-import H2 from '../components/h2';
-import { SITE_NAME, META_DESCRIPTION } from '../common/const';
-
 import useWalletProvider from '../components/web3-wallet/wallet-provider';
 import network from '../components/web3-wallet/network';
 import JoinResult from '../components/join-result';
-import LootDapp from '../components/loot/components/Dapp';
+import { SITE_NAME, META_DESCRIPTION } from '../common/const';
 
-import BG from '../public/images/bg.svg';
 import Logo1 from '../public/images/imtoken.svg';
 import Logo2 from '../public/images/dataverse.svg';
 import Logo3 from '../public/images/goatnft.svg';
@@ -29,7 +25,6 @@ export default function Home() {
   const [showResult, setShowResult] = React.useState(false);
   const { address } = useWalletProvider({ network });
 
-  const router = useRouter();
   const tNavigation = useTranslations('navigation');
 
   const meta = {
@@ -42,7 +37,6 @@ export default function Home() {
     'pb-8',
     // styles.container,
   );
-  const t = useTranslations('index');
 
   const onSearchChange = (e) => {
     setTwitter(e.target.value);
@@ -54,7 +48,7 @@ export default function Home() {
       await fetch('/api/form', {
         method: 'POST',
         body: JSON.stringify({
-          twitter: twitter,
+          twitter,
           address,
         }),
       });
@@ -73,13 +67,9 @@ export default function Home() {
   return (
     <Page meta={meta} className={styles.bg}>
       <Layout
-        // layoutStyles={{ background: 'url(/images/bg.png)' }}
         className={cls}
         headerBgCls="pt-14 flex flex-row w-full justify-end main-content"
       >
-        {/* <div>
-          <LootDapp address={address} query={router.query} pathname={router.pathname} />
-        </div> */}
         <div
           className={classnames(
             styles.loot,
@@ -112,10 +102,13 @@ export default function Home() {
           </div>
           <button
             disabled={!enable}
-            className={classnames('h-10 sm:h-14 mt-4 sm:mt-0 w-40 px-4 py-2 bg-white text-black sm:ml-2', {
-              'bg-gray-100': !enable,
-              'text-gray-500': !enable,
-            })}
+            className={classnames(
+              'h-10 sm:h-14 mt-4 sm:mt-0 w-40 px-4 py-2 bg-white text-black sm:ml-2',
+              {
+                'bg-gray-100': !enable,
+                'text-gray-500': !enable,
+              },
+            )}
             onClick={submit}
           >
             {submiting ? 'Loading' : 'Get M7E Passport'}

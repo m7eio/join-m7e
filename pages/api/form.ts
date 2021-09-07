@@ -12,10 +12,7 @@ export default async function handler(req, res) {
         'x-jwt-token': jwt,
       },
       body: JSON.stringify({
-        data: {
-          ...body,
-          date: new Date()
-        },
+        data: body,
       }),
     });
   };

@@ -89,7 +89,7 @@ export default function JoinResult({ onClose }) {
       await Promise.all([initCollections(), setCryptoAccounts(address), setProfile(profile)]);
 
       const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[View in Dataverse]</a>`;
-      Message({ content: redirectUrl, duration: 10_000 });
+      Message({ content: redirectUrl, duration: 0 });
 
     } catch (error) {
       console.log(error);

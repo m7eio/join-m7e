@@ -104,9 +104,15 @@ const message = (props: MessageProps & { duration?: number }) => {
     holder.remove();
   };
 
-  setTimeout(() => {
-    destroy();
-  }, props.duration ?? 3000);
+  if (props.duration !== 0) {
+    setTimeout(() => {
+      destroy();
+    }, props.duration ?? 3000);
+  }
+
+  holder.addEventListener('click', () => {
+    holder.remove();
+  });
 
   ReactDOM.render(<MessageComp {...props} />, holder);
 };

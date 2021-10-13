@@ -1,5 +1,3 @@
-import { useTranslations } from 'next-intl';
-
 import React from 'react';
 import classnames from 'classnames';
 import * as ethers from 'ethers';
@@ -22,14 +20,12 @@ export default function Home() {
   const [twitter, setTwitter] = React.useState('');
   const [submiting, setSubmiting] = React.useState(false);
   const [showResult, setShowResult] = React.useState(false);
-  const {address} = useWalletProvider({ network });
-
-  const tNavigation = useTranslations('navigation');
+  const { address } = useWalletProvider({ network });
 
   const meta = {
-    title: `${tNavigation('home')} - ${SITE_NAME}`,
+    title: `Join Us - ${SITE_NAME}`,
     description: META_DESCRIPTION,
-    image: '/images/logo5.png'
+    image: '/images/logo5.png',
   };
 
   const cls = classnames(
@@ -95,9 +91,7 @@ export default function Home() {
           <p>Shanghai Metaverse Week</p>
           <p>October 22-28, 2021</p>
           <p>Read Online (m7e.sh, Twittersphere)</p>
-          <p>
-            Play in Metaverse (Somium Space, Decentraland, CryptoVoxels, Sandbox)
-          </p>
+          <p>Play in Metaverse (Somium Space, Decentraland, CryptoVoxels, Sandbox)</p>
           <p>Meet in Physical World (Shanghai, Silicon Valley)</p>
           <p className="mt-1">
             Have Fun (NFT Claim, Airdrop, Exhibition, Forum, Meetup, Scavenger Hunt…)
@@ -157,24 +151,11 @@ export default function Home() {
               maxWidth: '100%',
               right: 0,
               bottom: 0,
-              transform: "translate(35%, 31%)"
+              transform: 'translate(35%, 31%)',
             }}
           />
         </div>
       </Layout>
     </Page>
   );
-}
-
-export async function getStaticProps({ locale = 'zh-CN' }) {
-  return {
-    props: {
-      messages: {
-        ...require(`../messages/common/${locale}.json`),
-        ...require(`../messages/index/${locale}.json`),
-      },
-      now: new Date().getTime(),
-      locale,
-    },
-  };
 }

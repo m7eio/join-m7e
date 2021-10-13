@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { SkipNavContent } from '@reach/skip-nav';
@@ -26,8 +25,6 @@ export default function Layout({
   headerBgCls,
 }: Props) {
   const router = useRouter();
-  const activeRoute = router.asPath;
-  const t = useTranslations('navigation');
 
   return (
     <>

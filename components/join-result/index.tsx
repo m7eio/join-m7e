@@ -30,11 +30,14 @@ export default function JoinResult({ onClose }) {
     setShowAirdropModal(true);
   }, [null]);
 
-  const getAvatar = React.useCallback(async (ethAddress: string) => {
-    const { character, items } = await fetchLoot(ethAddress);
-    console.log(items);
-    setAvatar(character);
-  }, [avatar]);
+  const getAvatar = React.useCallback(
+    async (ethAddress: string) => {
+      const { character, items } = await fetchLoot(ethAddress);
+      console.log(items);
+      setAvatar(character);
+    },
+    [avatar],
+  );
 
   React.useEffect(() => {
     if (address) {
@@ -50,7 +53,7 @@ export default function JoinResult({ onClose }) {
     setLoading(true);
     try {
       initIDX();
-      if(!avatar) throw new Error('Check your avatar')
+      if (!avatar) throw new Error('Check your avatar');
 
       Message({ content: 'Start authenticating...' });
       const [, cid] = await Promise.all([
@@ -90,7 +93,6 @@ export default function JoinResult({ onClose }) {
 
       const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[View in Dataverse]</a>`;
       Message({ content: redirectUrl, duration: 0 });
-
     } catch (error) {
       console.log(error);
       Message({ content: 'Failed Network!', type: MessageTypes.Error });
@@ -122,8 +124,12 @@ export default function JoinResult({ onClose }) {
 
         <div className="mt-14">
           <div className="border border-white w-80 h-80 sm:w-96	sm:h-96 flex justify-center items-center">
-           { avatar ? <img className="w-full h-full" src={avatar} /> : <div className="text-white">Loading...</div> }
-           </div>
+            {avatar ? (
+              <img className="w-full h-full" src={avatar} />
+            ) : (
+              <div className="text-white">Loading...</div>
+            )}
+          </div>
           <div className="text-gray-400 text-right mt-1">
             powered by{' '}
             <a href="https://twitter.com/stephancill" className="underline">
@@ -138,10 +144,7 @@ export default function JoinResult({ onClose }) {
         >
           set as <span className="underline">Dataverse</span> avatar 👀
         </button>
-        <button
-          className="h-14 w-60 px-4 py-2 bg-white text-black mb-4"
-          onClick={showModal}
-        >
+        <button className="h-14 w-60 px-4 py-2 bg-white text-black mb-4" onClick={showModal}>
           get airdrop 🦄
         </button>
         <a

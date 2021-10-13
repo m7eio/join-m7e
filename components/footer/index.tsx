@@ -1,9 +1,6 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
 
 export default function Footer() {
-  const t = useTranslations('meta');
-
   return (
     <footer className="w-gray bg-black flex text-white flex items-center	">
       <div>

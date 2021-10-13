@@ -19,10 +19,10 @@ module.exports = withAntdLess({
 
     return config;
   },
-  i18n: {
-    locales: ['zh-CN', 'en-US'],
-    defaultLocale: 'en-US',
-  },
+  // i18n: {
+  //   locales: ['zh-CN', 'en-US'],
+  //   defaultLocale: 'en-US',
+  // },
   images: {
     domains: ['static.ghost.org'],
   },

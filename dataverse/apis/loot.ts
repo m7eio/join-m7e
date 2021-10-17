@@ -12,7 +12,7 @@ const apiKey =
 const imgDir = `ipfs://QmUEvrQtE67en6upRT6K4j1LD58VQ6oAQQJ6cWy9MPk1TL`;
 
 export const jsonProxy = (url: string) =>
-  `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+  `https://allorigins.dataverse.art/raw?url=${encodeURIComponent(url)}`;
 
 export async function storeLootImg(blob_data: string) {
   const storage = new NFTStorage({ token: apiKey });

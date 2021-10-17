@@ -67,7 +67,7 @@ export default function JoinResult({ onClose }) {
       console.log(did);
 
       const profile: BasicProfile = {
-        name: 'test_name',
+        name: 'Unnamed',
         description: 'test_description',
         image: {
           original: {

@@ -1,6 +1,7 @@
 import type { CeramicApi } from '@ceramicnetwork/common';
 import type { IDX } from '@ceramicstudio/idx';
 import { apis, BasicProfile } from 'dataverse-sdk';
+import {createThreeIdFromManager, authenticate } from './threeId'
 
 let ceramic: CeramicApi;
 let idx: IDX;
@@ -15,13 +16,12 @@ export function getDID(): string {
 }
 
 export async function authenticateIDX(ethereumProvider: any, address: string): Promise<void> {
-  const didProvider = await apis.threeId.createThreeIdFromEthereumProvider({
-    threeIdConnectHost: 'https://app-clay.3idconnect.org',
+  const didProvider = await createThreeIdFromManager({
+    ceramicApiHost: 'https://dataverseceramicdaemon.com',
     ethereumProvider,
     address,
   });
-
-  await apis.threeId.authenticate({ ceramic, didProvider });
+  await authenticate({ ceramic, didProvider });
 }
 
 export async function initCollections(did?: string) {

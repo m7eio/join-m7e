@@ -1,18 +1,22 @@
 import React, { useCallback, useState } from 'react';
-import { BasicProfile } from 'dataverse-sdk';
+import { 
+  BasicProfile,
+  // NFTBookmark 
+} from 'dataverse-sdk';
 import useWalletProvider from '../web3-wallet/wallet-provider';
 import network from '../web3-wallet/network';
 import { simpleAdress } from '../web3-wallet/connect-wallet';
 import Modal from '../web3-wallet/modal';
 
 import { fetchLoot, storeLootImg } from '../../dataverse/apis/loot';
+// import { reportSaveNft, fetchNftCount, fetchNftCounts } from '../../dataverse/apis/report';
 import {
   authenticateIDX,
   initCollections,
   initIDX,
   getDID,
-  setCryptoAccounts,
   setProfile,
+  // addBookmark
 } from '../../dataverse/apis/ceramic';
 import Message, { MessageTypes } from '../../dataverse/components/Message';
 
@@ -89,10 +93,72 @@ export default function JoinResult({ onClose }) {
 
       Message({ content: 'Init your Dataverse...' });
 
-      await Promise.all([initCollections(), setCryptoAccounts(address), setProfile(profile)]);
+      await Promise.all([initCollections(), setProfile(profile)]);
 
       const redirectUrl = `<a href='https://dataverse.art/#/${did}' target='_blank'>[View in Dataverse]</a>`;
       Message({ content: redirectUrl, duration: 0 });
+
+      // const bookmark1: NFTBookmark = {
+      //   tokenId: '61169',
+      //   contract: '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405',
+      //   chain: 'Ethereum',
+      //   url: 'https://foundation.app/@reylarsdam/the-artist-and-his-studio-61169',
+      //   tags: ['foundation', 'music'],
+      //   note: "",
+      //   date: new Date().toISOString(),
+      // };
+
+      // const bookmark2: NFTBookmark = {
+      //   tokenId: '4557',
+      //   contract: '0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7',
+      //   chain: 'Ethereum',
+      //   url: 'https://zora.co/phlote/4557',
+      //   tags: ['zora', 'hello world'],
+      //   note: "",
+      //   date: new Date().toISOString(),
+      // };
+
+      // await addBookmark(bookmark1);
+      // await addBookmark(bookmark2);
+
+      // reportSaveNft({
+      //   chain:'Ethereum',
+      //   token_id: '61169',
+      //   contract: '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405'
+      // });
+
+      // reportSaveNft({
+      //   chain:'Ethereum',
+      //   token_id: '4557',
+      //   contract: '0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7'
+      // });
+
+      // const countRep = await fetchNftCount({
+      //   tokenId: '61169',
+      //   contract: '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405',
+      //   chain: 'Ethereum'
+      // });
+
+      // console.log(countRep.data.data.count);
+
+      // const countsRep = await fetchNftCounts([
+      //   {
+      //     tokenId: '61169',
+      //     contract: '0x3B3ee1931Dc30C1957379FAc9aba94D1C48a5405',
+      //     chain: 'Ethereum'
+      //   },
+      //   {
+      //     tokenId: '4557',
+      //     contract: '0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7',
+      //     chain: 'Ethereum'
+      //   }
+      // ]);
+
+      // const NFTList = countsRep.data.data as Array<Record<string, unknown>>;
+      // const counts = NFTList.map(nftRecord=> (nftRecord as {count: number}).count);
+      
+      // console.log(counts);
+
     } catch (error) {
       console.log(error);
       Message({ content: 'Failed Network!', type: MessageTypes.Error });

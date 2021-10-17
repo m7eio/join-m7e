@@ -24,16 +24,7 @@ const idxConstants = __importStar(require("@ceramicstudio/idx-constants"));
 const definitions_1 = require("./definitions");
 const schemas_1 = require("./schemas");
 const aliases_1 = require("./aliases");
-exports.definitions = {
-    ...idxConstants.definitions,
-    ...definitions_1.PUBLISHED_DEFINITIONS,
-};
-exports.schemas = {
-    ...idxConstants.schemas,
-    ...schemas_1.PUBLISHED_SCHEMAS,
-};
-exports.aliases = {
-    ...idxConstants.definitions,
-    ...aliases_1.ALIASES,
-};
+exports.definitions = Object.assign(Object.assign({}, idxConstants.definitions), definitions_1.PUBLISHED_DEFINITIONS);
+exports.schemas = Object.assign(Object.assign({}, idxConstants.schemas), schemas_1.PUBLISHED_SCHEMAS);
+exports.aliases = Object.assign(Object.assign({}, idxConstants.definitions), aliases_1.ALIASES);
 exports.enums = __importStar(require("./enums"));

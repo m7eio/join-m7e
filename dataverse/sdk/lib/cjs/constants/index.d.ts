@@ -7,10 +7,8 @@ export declare const definitions: {
     threeIdKeychain: string;
 };
 export declare const schemas: {
-    JWE: string;
     DocIds: string;
     NFTBookmark: string;
-    Collections: string;
     AlsoKnownAs: string;
     BasicProfile: string;
     CryptoAccounts: string;
